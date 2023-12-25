@@ -39,6 +39,10 @@ dependencies {
     )
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 tasks.withType(Test) {
     useJUnitPlatform()
 
@@ -47,5 +51,17 @@ tasks.withType(Test) {
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }
+    }
+}
+
+task android_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("android")
+    }
+}
+
+task ios_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("ios")
     }
 }
